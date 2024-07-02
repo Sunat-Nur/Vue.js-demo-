@@ -6,17 +6,21 @@
           :favoriteMoviesCount="movies.filter(c => c.favorite).length"
       />
       <div class="search-panel">
-        <SearchPanel :updateTermHandler="updateTermHandler"/>
-        <Appfileter/>
+        <SearchPanel
+            :updateTermHandler="updateTermHandler"
+        />
+        <Appfileter
+            :updateFilterHandler="updateFilterHandler"
+            :filterName="filter"
+        />
       </div>
       <MovieList
-          :movies="onSearchHandler(movies, term)"
+          :movies="onFilterHandler(onSearchHandler(movies, term), filter)"
           @onToggle="onToggleHandler"
           @onRemove="onRemoveHandler"
       />
       <!--      bola div dan ona div ga ma'lumot olyabdi-->
       <MovieAddForm @createMovie="createMovie"/>
-
     </div>
   </div>
 </template>
@@ -42,7 +46,7 @@ export default {
       movies: [
         {
           name: "our school",
-          viewers: 811,
+          viewers: 711,
           favorite: false,
           like: true,
           id: 1,
@@ -56,13 +60,14 @@ export default {
         },
         {
           name: "Busan train",
-          viewers: 811,
+          viewers: 911,
           favorite: true,
           like: false,
           id: 3,
         },
       ],
       term: "",
+      filter: "all",
     }
   },
   methods: {
@@ -87,8 +92,21 @@ export default {
       }
       return arr.filter(c => c.name.toLowerCase().indexOf(term) > -1)
     },
+    onFilterHandler(arr, filter) {
+      switch (filter) {
+        case "popular":
+          return arr.filter(movie => movie.like)
+        case "mostViewers":
+          return arr.filter(movie => movie.viewers > 500)
+        default:
+          return arr
+      }
+    },
     updateTermHandler(term) {
       this.term = term;
+    },
+    updateFilterHandler(filter) {
+      this.filter = filter;
     }
   },
 }
