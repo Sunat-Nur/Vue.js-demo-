@@ -28,6 +28,7 @@ export default {
   },
   methods: {         // methodni yaratik
     addMovie() {           // methodni ichida addMoview yangi method yaratyabmiz
+      if ( !this.name || !this.viewers  ) return   // bo'sh malumot ketmasligi ucun
       const newMovie = {    // addMovie methodni ichida yangi obyekt yaratyabmiz
         name: this.name,    // yuqordagi datalarni qiymatini this bilan olib olyabmiz
         viewers: this.viewers,

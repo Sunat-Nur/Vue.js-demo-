@@ -9,7 +9,11 @@
         <SearchPanel/>
         <Appfileter/>
       </div>
-      <MovieList :movies="movies" @onToggle="onToggleHandler"/>
+      <MovieList
+          :movies="movies"
+          @onToggle="onToggleHandler"
+          @onRemove="onRemoveHandler"
+      />
       <!--      bola div dan ona div ga ma'lumot olyabdi-->
       <MovieAddForm @createMovie="createMovie"/>
 
@@ -72,6 +76,9 @@ export default {
         return item;
       })
     },
+    onRemoveHandler(id) {
+      this.movies = this.movies.filter(movie => movie.id !== id)
+    }
   },
 }
 </script>
