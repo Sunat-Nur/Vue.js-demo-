@@ -9,7 +9,7 @@
         <SearchPanel/>
         <Appfileter/>
       </div>
-      <MovieList :movies="movies" @onLike="onLikeHandler"/>
+      <MovieList :movies="movies" @onToggle="onToggleHandler"/>
       <!--      bola div dan ona div ga ma'lumot olyabdi-->
       <MovieAddForm @createMovie="createMovie"/>
 
@@ -63,12 +63,11 @@ export default {
   methods: {
     createMovie(item) { // create movie parameter qabul qiladi. ( argument, sifatida itemni berdik)
       this.movies.push(item); // item larni arrayga push qilyabdi
-      console.log(item);
     },
-    onLikeHandler(id) {
-      this.movies.map(item => {
+    onToggleHandler({id, prop}) {
+      this.movies = this.movies.map(item => {
         if (item.id === id) {
-          item.like = !item.like;
+          return {...item, [prop]: !item [prop]}
         }
         return item;
       })
