@@ -1,28 +1,13 @@
 <template>
   <div class="btn-group">
     <button
+        v-for="btn in filterButtons"
+        :key="btn.name"
         class="btn"
-        type="button"
-        @click="filterHandler('all')"
-        :class="[filterName === 'all' ? 'btn-dark' : 'btn-outline-dark']"
+        :class="[filterName === btn.name ? 'btn-dark' : 'btn-outline-dark']"
+        @click="filterHandler(btn.name)"
     >
-      all movies
-    </button>
-    <button
-        class="btn "
-        type="button"
-        @click="filterHandler('popular')"
-        :class="[filterName === 'popular' ? 'btn-dark' : 'btn-outline-dark']"
-    >
-      famous movies
-    </button>
-    <button
-        class="btn "
-        type="button"
-        @click="filterHandler('mostViewers')"
-        :class="[filterName === 'mostViewers' ? 'btn-dark' : 'btn-outline-dark']"
-    >
-      most watched movies
+      {{ btn.title }}
     </button>
   </div>
 </template>
@@ -41,7 +26,21 @@ export default {
   },
   data() {
     return {
-      filter: 'all',
+      filterButtons: [
+        {
+          title: 'All movies',
+          name: 'all'
+        },
+        {
+          title: 'famous movies',
+          name: 'popular'
+        },
+        {
+          title: 'most watched movies',
+          name: 'mostViewers'
+        },
+
+      ]
     }
   },
   methods: {
