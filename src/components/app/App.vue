@@ -19,8 +19,8 @@
           @onToggle="onToggleHandler"
           @onRemove="onRemoveHandler"
       />
-      <!--      bola div dan ona div ga ma'lumot olyabdi-->
-      <MovieAddForm @createMovie="createMovie"/>
+      <div v-if="filter === 'all'">Filter all</div>
+      <MovieAddForm @createMovie="createMovie" v-else="filter === 'popular'"/>
     </div>
   </div>
 </template>
@@ -107,7 +107,19 @@ export default {
     },
     updateFilterHandler(filter) {
       this.filter = filter;
-    }
+    },
+    mountedLod() {
+      console.log("Mounted")
+    },
+    updatedLog() {
+      console.log("Updated")
+    },
+  },
+  mounted() {
+    this.mountedLod()
+  },
+  updated() {
+    this.updatedLog()
   },
 }
 </script>
@@ -135,4 +147,7 @@ export default {
   box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.15);
 }
 
+.none {
+  display: none;
+}
 </style>

@@ -45,6 +45,9 @@ export default {
       this.viewers = ""
     },
   },
+  unmounted() {
+    console.log("UNMOUNT")
+  }
 }
 </script>
 
