@@ -1,15 +1,11 @@
 <template>
-  <input
-      type="text"
-      class="form-control search-input"
-      placeholder="search movie"
-      :value="term"
-      @input="changeHandler"
-  />
+  <Input class="search-input" placeholder="search movie" v-model="term" @input="changeHandler"/>
 </template>
 
 
 <script>
+
+
 export default {
   props: {
     updateTermHandler: {

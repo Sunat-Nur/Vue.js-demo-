@@ -2,23 +2,24 @@
   <div class="movie-add-form">
     <h3>add new movie</h3>
     <form class="add-form d-flex" @submit.prevent>
-      <input
-          type="text" class="form-control new-movie-label"
-          placeholder="which movie" :value="name"
-          @:input="name = $event.target.value"
+      <Input
+          class="new-movie-label"
+          placeholder="which movie?"
+          v-model="name"
       />
-      <input
-          type="text" class="form-control new-movie-label"
-          placeholder="how many time watched" :value="viewers"
-          @:input="viewers = $event.target.value"
+      <Input
+          class="new-movie-label"
+          placeholder="how many time watched?"
+          type="number"
+          v-model="viewers"
       />
-      <button class="btn btn-outline-dark" type="submit" @click="addMovie">Add</button>
+
+      <PrimaryButton class="btn-outline-dark" type="submit" @click="addMovie">Add</PrimaryButton>
     </form>
   </div>
 </template>
+
 <script>
-
-
 export default {
   data() {
     return {
@@ -26,9 +27,10 @@ export default {
       viewers: "",
     }
   },
+
   methods: {         // methodni yaratik
     addMovie() {           // methodni ichida addMoview yangi method yaratyabmiz
-      if ( !this.name || !this.viewers  ) return   // bo'sh malumot ketmasligi ucun
+      if (!this.name || !this.viewers) return   // bo'sh malumot ketmasligi ucun
       const newMovie = {    // addMovie methodni ichida yangi obyekt yaratyabmiz
         name: this.name,    // yuqordagi datalarni qiymatini this bilan olib olyabmiz
         viewers: this.viewers,
